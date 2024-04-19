@@ -2,6 +2,13 @@
 import { ref } from 'vue';
   const pais = ref("");
   const sedes = ref(["Madrid","Barcelona","Santiago","Santo Domingo"]);
+  const inputSede = ref('');
+
+  //Métodos
+  const agregarSede = ()=>{
+    sedes.value.push(inputSede.value);
+    inputSede.value='';
+  }
 </script>
 
 <template>
@@ -24,6 +31,14 @@ import { ref } from 'vue';
     <article v-for="(sede,index,) of sedes" :key="index">
       <p>{{ sede }}</p>
     </article>
+  </section>
+  <section>
+    <label for="nuevaSede">
+      Nueva Sede:
+      <input type="text" name="nuevaSede" placeholder="New York"
+      v-model="inputSede" v-on:keyup.enter="agregarSede()">
+    </label>
+    <button v-show="inputSede" v-on:click="agregarSede()">Agregar</button>
   </section>
 </template>
 
